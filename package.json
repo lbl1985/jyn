@@ -4,12 +4,16 @@
   "scripts": {
     "start": "nodemon app.js"
   },
+  "jshintConfig": {
+    "node": true
+  },
   "dependencies": {
     "body-parser": "^1.17.1",
     "cookie-parser": "^1.4.3",
     "crypto": "0.0.3",
     "express": "^4.15.2",
     "express-session": "^1.15.1",
+    "jslint": "^0.10.3",
     "pug": "^2.0.0-beta11"
   }
 }
