@@ -1,4 +1,9 @@
 {
+  "name": "jieyina_package_management_system",
+  "private": true,
+  "scripts": {
+    "start": "nodemon app.js"
+  },
   "dependencies": {
     "body-parser": "^1.17.1",
     "cookie-parser": "^1.4.3",

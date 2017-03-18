@@ -12,13 +12,13 @@ var app = express();
 app.locals.appName = "Qingdao Jieyina Package Management System";
 
 app.set("port", process.env.PORT || 3000);
-app.set("view engine", "jade");
+app.set("view engine", "pug");
 app.set("views", path.resolve(__dirname, "views"));
 
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(cookieParser());
 app.use(session({
-    secret: require('crypto').randomBytes(64).toString(hex),
+    secret: require('crypto').randomBytes(64).toString('hex'),
     resave: true,
     saveUninitialized: true
 }));
