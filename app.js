@@ -13,10 +13,16 @@ var setUpPassport = require("./auth/setuppassport_local");
 var routes = require('./routes/web_routes');
 
 var app = express();
-mongoose.connect("mongodb://localhost:27017/packCtrl");
-setUpPassport();
-
 app.locals.appName = "Qingdao Jieyina Package Management System";
+
+mongoose.connect("mongodb://localhost:27017/packCtrl");
+var db = mongoose.connection;
+db.on('error', console.error.bind(console, 'connection error:'));
+db.once('open', function () {
+    console.log("mongoose connect to mongo db");
+});
+
+setUpPassport();
 
 app.set("port", process.env.PORT || 3000);
 app.set("view engine", "pug");
