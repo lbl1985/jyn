@@ -13,7 +13,7 @@ var setUpPassport = require("./auth/setuppassport_local");
 var routes = require('./routes/web_routes');
 
 var app = express();
-app.locals.appName = "Qingdao Jieyina Package Management System";
+app.locals.appName = "青岛捷怡纳包裹管理系统";
 
 mongoose.connect("mongodb://localhost:27017/packCtrl");
 var db = mongoose.connection;
