@@ -14,6 +14,7 @@ var routes = require('./routes/web_routes');
 
 var app = express();
 app.locals.appName = "青岛捷怡纳包裹管理系统";
+app.locals.currentUser = "Binlong Li";
 
 mongoose.connect("mongodb://localhost:27017/packCtrl");
 var db = mongoose.connection;
