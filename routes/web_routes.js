@@ -34,4 +34,8 @@ router.get("/users", function (req, res, next) {
         });
 });
 
+router.get("/signup", function (req, res) {
+    res.render("signup", {options: req.app.locals});
+})
+
 module.exports = router;
