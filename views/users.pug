@@ -1,0 +1,10 @@
+extends layout.pug
+block headerTitle
+    title Users
+block body
+    <div class="panel panel-default">
+        .panel-heading
+            ul
+                each user in users
+                    li user
+    </div>

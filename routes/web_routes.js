@@ -3,6 +3,7 @@
 var express = require("express");
 var router = express.Router();
 var passport = require("passport");
+var User = require("../models/user");
 
 router.use(function (req, res, next) {
     res.locals.currentUser = req.user;
@@ -19,6 +20,18 @@ router.get("/", function (req, res) {
 router.get("/about", function (req, res) {
     req = req;
     res.render("about", {options: req.app.locals});
+});
+
+router.get("/users", function (req, res, next) {
+    req = req;
+    User.find()
+        .sort({createdAt: "descending"})
+        .exec(function (err, users) {
+            if (err) {
+                return next(err);
+            }
+            res.render("users", {users: users, options: req.app.locals});
+        });
 });
 
 module.exports = router;
