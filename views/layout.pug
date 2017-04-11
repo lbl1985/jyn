@@ -1,16 +1,21 @@
 html(lang="zh")
     head
         meta(charset="utf-8")
-        title 青岛捷怡纳包裹管理系统
+        block headerTitle
         link(rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css")
 
         div(class="navbar navbar-default navbar-static-top" role="navigation")
             div(class="container")
                 div(class="navbar-header")
                     a(class="navbar-brand" href="/") 青岛捷怡纳包裹管理系统
+                    
                 ul(class="nav navbar-nav navbar-right")
-                    li <a href="/login">登录</a>
-                    li <a href="/singup">注册</a>
-            
+                    - var userName = options.currentUser
+                    if options.currentUser
+                        li <a href="/edit">Hello, #{options.currentUser}</a>
+                        li <a href="/logout">Log Out</a>
+                    else
+                        li <a href="/login">登录</a>
+                        li <a href="/singup">注册</a>
     body
         block body
