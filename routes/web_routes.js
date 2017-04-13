@@ -44,7 +44,7 @@ router.post("/signup", function (req, res, next) {
     var company = req.body.company;
     var Group = req.body.Group;
 
-    User.findOne({username: username}, function (err, user){
+    User.findOne({username: username}, function (err, user) {
         if (err) {
             return next(err);
         }

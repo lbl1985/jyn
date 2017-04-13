@@ -6,5 +6,5 @@ block body
         .panel-heading
             ul
                 each user in users
-                    li user
+                    li #{user.username} : #{user.company} : #{user.Group} : #{user.createdAt}
     </div>

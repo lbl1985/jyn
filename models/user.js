@@ -2,7 +2,7 @@
 'use strict';
 var mongoose = require('mongoose');
 var bcrypt = require("bcrypt-nodejs");
-var SALT_FACTOR = 30;
+var SALT_FACTOR = 10;
 var noop = function () {};
 
 // company dragonistweb has the highest priviliege to control all other companies.
