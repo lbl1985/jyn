@@ -7,6 +7,9 @@ var User = require("../models/user");
 
 router.use(function (req, res, next) {
     res.locals.currentUser = req.user;
+    if (req.user) {
+        req.app.locals.currentUser = req.user.username;
+    }
     res.locals.errors = req.flash("error");
     res.locals.info = req.flash("info");
     next();
@@ -21,6 +24,15 @@ router.get("/about", function (req, res) {
     req = req;
     res.render("about", {options: req.app.locals});
 });
+
+router.get("/login", function (req, res, next) {
+    res.render("login", {options: req.app.locals});
+});
+
+router.post("/login", passport.authenticate('local', {
+    successRedirect: "/",
+    failureRedirect: "/login"
+}));
 
 router.get("/users", function (req, res, next) {
     req = req;
@@ -59,7 +71,7 @@ router.post("/signup", function (req, res, next) {
             Group: Group
         });
         newUser.save();
-        return res.redirect("/users");
+        return res.redirect("/");
     })
 })
 
