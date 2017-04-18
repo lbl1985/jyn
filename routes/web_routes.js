@@ -9,6 +9,8 @@ router.use(function (req, res, next) {
     res.locals.currentUser = req.user;
     if (req.user) {
         req.app.locals.currentUser = req.user.username;
+    } else {
+        req.app.locals.currentUser = "";
     }
     res.locals.errors = req.flash("error");
     res.locals.info = req.flash("info");
@@ -33,6 +35,11 @@ router.post("/login", passport.authenticate('local', {
     successRedirect: "/",
     failureRedirect: "/login"
 }));
+
+router.get("/logout", function (req, res) {
+    req.logOut();
+    res.redirect("/");
+})
 
 router.get("/users", function (req, res, next) {
     req = req;
