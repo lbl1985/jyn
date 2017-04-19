@@ -27,32 +27,6 @@ router.get("/about", function (req, res) {
     res.render("about", {options: req.app.locals});
 });
 
-router.get("/login", function (req, res, next) {
-    res.render("login", {options: req.app.locals});
-});
-
-router.post("/login", passport.authenticate('local', {
-    successRedirect: "/",
-    failureRedirect: "/login"
-}));
-
-router.get("/logout", function (req, res) {
-    req.logOut();
-    res.redirect("/");
-})
-
-router.get("/users", function (req, res, next) {
-    req = req;
-    User.find()
-        .sort({createdAt: "descending"})
-        .exec(function (err, users) {
-            if (err) {
-                return next(err);
-            }
-            res.render("users", {users: users, options: req.app.locals});
-        });
-});
-
 router.get("/signup", function (req, res) {
     res.render("signup", {options: req.app.locals});
 });
@@ -79,6 +53,50 @@ router.post("/signup", function (req, res, next) {
         });
         newUser.save();
         return res.redirect("/");
+    });
+});
+
+router.get("/login", function (req, res, next) {
+    res.render("login", {options: req.app.locals});
+});
+
+router.post("/login", passport.authenticate('local', {
+    successRedirect: "/",
+    failureRedirect: "/login"
+}));
+
+router.get("/logout", function (req, res) {
+    req.logOut();
+    res.redirect("/");
+})
+
+router.get("/users", function (req, res, next) {
+    req = req;
+    User.find()
+        .sort({createdAt: "descending"})
+        .exec(function (err, users) {
+            if (err) {
+                return next(err);
+            }
+            res.render("users", {users: users, options: req.app.locals});
+        });
+});
+function ensureAuthenticated(req, res, next) {
+    if (req.isAuthenticated() && req.params.username === req.user.username) {
+        next();
+    } else {
+        res.redirect("/login");
+    }
+}
+router.get("/users/:username/profile", ensureAuthenticated, function (req, res, next) {
+    User.findOne({username: req.params.username}, function (err, user) {
+        if (err) {
+            return next(err);
+        }
+        if (!user) {
+            return next(404);
+        }
+        res.render("profile", {user: user, options: req.app.locals});
     })
 })
 
