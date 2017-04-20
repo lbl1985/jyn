@@ -13,9 +13,10 @@ var productSchema = mongoose.Schema({
 });
 
 var orderStatus = mongoose.Schema({
-    // status includes: 
+    // status includes:
     // Created, payment_received, manufacture, shipping, shipped, closed
-    current_status: {type: String},
+    status: {type: String},
+    date: {type: Date},
     create_date: {type: Date, default: Date.now},
     create_by: {type: String},
     assign_to: {type: String},
@@ -36,13 +37,15 @@ var contactInfo = mongoose.Schema({
 var orderSchema = mongoose.Schema({
     uuid: {type: String, required: true, unique: true},
     title: {type: String, required: true},
-    product: {type: [productSchema], required: true},
+    products: {type: [productSchema], required: true},
     ship_add: {type: String, required: true},
     company: {type: String},
+    company_src: {type: String}, // provider company
     expect_ship_date: {type: Date},
     status: {type: orderStatus},
     ship_receipt: {type: mongoose.Schema.Types.Mixed},
-    contact: {type: contactInfo}
+    contact: {type: contactInfo},
+    note: {type: String}
 });
 
 var Order = mongoose.model("Order", orderSchema);

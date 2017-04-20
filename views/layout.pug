@@ -12,6 +12,7 @@ html(lang="zh")
                 ul(class="nav navbar-nav navbar-right")
                     - var userName = options.currentUser
                     if options.currentUser
+                        li <a href="/create_order">Create Order</a>
                         li <a href="/edit">Hello, #{options.currentUser}</a>
                         li <a href="/logout">Log Out</a>
                     else

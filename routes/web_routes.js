@@ -82,7 +82,7 @@ router.get("/users", function (req, res, next) {
         });
 });
 function ensureAuthenticated(req, res, next) {
-    if (req.isAuthenticated() && req.params.username === req.user.username) {
+    if (req.isAuthenticated() && req.app.locals.currentUser === req.user.username) {
         next();
     } else {
         res.redirect("/login");
@@ -99,5 +99,10 @@ router.get("/users/:username/profile", ensureAuthenticated, function (req, res, 
         res.render("profile", {user: user, options: req.app.locals});
     })
 })
+
+router.get("/create_order", ensureAuthenticated, function (req, res) {
+    res.render("create_order", {options: req.app.locals});
+});
+
 
 module.exports = router;
