@@ -4,11 +4,11 @@
 }
 
 .form-control{
-    width:50%;
+    max-width:300;
     margin:auto;
 }
 
 #login_submit {
-    width: 20%;
+    max-width: 100;
     margin: auto;
 }
