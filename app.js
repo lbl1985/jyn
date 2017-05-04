@@ -37,6 +37,7 @@ app.use(session({
     saveUninitialized: true
 }));
 app.use(flash());
+app.use(express.static(path.join(__dirname)));
 
 app.use(passport.initialize());
 app.use(passport.session());

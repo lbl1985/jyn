@@ -1,0 +1,14 @@
+#login_h1 {
+    text-align: center;
+    color:blue;
+}
+
+.form-control{
+    width:50%;
+    margin:auto;
+}
+
+#login_submit {
+    width: 20%;
+    margin: auto;
+}
