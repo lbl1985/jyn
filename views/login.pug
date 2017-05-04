@@ -2,7 +2,7 @@ extends ./layout.pug
 block headerTitle
     title Login Page
 block body
-    h1 Log In
+    h1(id="login_h1") Log In
     <form action="/login" method="post">
         <input name="username" type="text" class="form-control"  placeholder="Username" required autofocus>
         br
