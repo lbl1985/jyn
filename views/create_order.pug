@@ -1,7 +1,22 @@
 extends ./layout.pug
 block body
-    h2 Create Order
+    h2(id="co_h2") 创建订单
     <form action="/create_order" method="post">
         <input name="title" type="text" class="form-control" placeholder="Order Name" autofocus>
-        br     
+        br
+        br
+        #product
+            input(name="p_name" type="text" class="form-control" placeholder="Produce Name")
+            br
+            input(name="p_model" type="text" class="form-control" placeholder="Produce Model")
+            br
+            input(name="quantity" type="number" class="form-control" placeholder="Quantity")
+            br
+            input(name="unit" type="number" class="form-control" placeholder="Unit")
+            br
+            input(name="unit_price" type="number" class="form-control" placeholder="Unit Price")
+            br
+            input(name="note" type="text" class="form-control" placeholder="Note")
+            br
+
     </form>
