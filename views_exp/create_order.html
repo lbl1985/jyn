@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Create Order</title>
+        <link rel="stylesheet" type="text/css" href="../css/custom.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+        <script>
+             $(document).ready(function() {
+                $('#indicator').text("hello world")
+
+                $('p').click(function(){
+                    $('#indicator').text("hello world")
+                })
+
+                $('#category_selector').change(function(evt){
+                    evt.preventDefault();
+                    selected_item = $('#category_selector option:selected').text();
+                    $(".form-control").hide()
+                    if(selected_item === 'title') {
+                        $('[name="input_title"]').show();
+                    }
+                    if(selected_item === 'product') {
+                        $('[name="input_p_name"]').show();
+                        $('[name="input_p_model"]').show();
+                        $('[name="input_p_quantity"]').show();
+                        $('[name="input_p_unit"]').show();
+                        $('[name="input_p_price"]').show();
+                    }
+                    $('#indicator').text(selected_item);
+                });
+            });
+        </script>
+    </head>
+
+    <body>
+        <form>
+            <select name="category" id="category_selector">
+                <option value="title">Title</option>
+                <option value="product">Product</option>
+                <option value="note">Note</option>
+            </select>
+            <br><br>
+            <p id = "indicator">Show something</p>
+            <br>
+            <input name="input_title" type="text" class="form-control" placeholder="Order Title" required autofocus>
+
+            <input name="input_p_name" type="hidden" class="input_product form-control" placeholder="Product Name" autofocus>
+            <input name="input_p_model" type="hidden" class="input_product form-control" placeholder="Product Name">
+            <input name="input_p_quantity" type="hidden" class="input_product form-control" placeholder="Product Quantity">
+            <input name="input_p_unit" type="hidden" class="input_product form-control" placeholder="Product Unit">
+            <input name="input_p_price" type="hidden" class="input_product form-control" placeholder="Product Price">
+
+            <input name="input_note" type="hidden" class="input_note form-contrl" placeholder="Note">
+    </body>
+</html>
