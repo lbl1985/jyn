@@ -6,27 +6,27 @@
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
         <script>
              $(document).ready(function() {
-                $('#indicator').text("hello world")
-
-                $('p').click(function(){
-                    $('#indicator').text("hello world")
-                })
-
                 $('#category_selector').change(function(evt){
                     evt.preventDefault();
                     selected_item = $('#category_selector option:selected').text();
-                    $(".form-control").hide()
-                    if(selected_item === 'title') {
+                    // $(".form-control").hide()
+                    $('[name="input_title"]').hide();
+                    $("#input_p").hide();
+                    $('[name="input_note"]').hide();
+                    if(selected_item === 'Title') {
                         $('[name="input_title"]').show();
                     }
-                    if(selected_item === 'product') {
-                        $('[name="input_p_name"]').show();
-                        $('[name="input_p_model"]').show();
-                        $('[name="input_p_quantity"]').show();
-                        $('[name="input_p_unit"]').show();
-                        $('[name="input_p_price"]').show();
+                    if(selected_item === 'Product') {
+                        $('#input_p').show();
+                        // $('[name="input_p_name"]').show();
+                        // $('[name="input_p_model"]').show();
+                        // $('[name="input_p_quantity"]').show();
+                        // $('[name="input_p_unit"]').show();
+                        // $('[name="input_p_price"]').show();
                     }
-                    $('#indicator').text(selected_item);
+                    if(selected_item === "Note") {
+                        $('[name="input_note"]').show();
+                    }
                 });
             });
         </script>
@@ -40,16 +40,20 @@
                 <option value="note">Note</option>
             </select>
             <br><br>
-            <p id = "indicator">Show something</p>
-            <br>
             <input name="input_title" type="text" class="form-control" placeholder="Order Title" required autofocus>
 
-            <input name="input_p_name" type="hidden" class="input_product form-control" placeholder="Product Name" autofocus>
-            <input name="input_p_model" type="hidden" class="input_product form-control" placeholder="Product Name">
-            <input name="input_p_quantity" type="hidden" class="input_product form-control" placeholder="Product Quantity">
-            <input name="input_p_unit" type="hidden" class="input_product form-control" placeholder="Product Unit">
-            <input name="input_p_price" type="hidden" class="input_product form-control" placeholder="Product Price">
+            <div id="input_p" style="display: none;">
+                <input name="input_p_name" type="text" class="form-control" placeholder="Product Name" autofocus>
+                <br>
+                <input name="input_p_model" type="text" class="form-control" placeholder="Product Model">
+                <br>
+                <input name="input_p_quantity" type="number" class="form-control" placeholder="Product Quantity">
+                <br>
+                <input name="input_p_unit" type="number" class="form-control" placeholder="Product Unit">
+                <br>
+                <input name="input_p_price" type="number" class="form-control" placeholder="Product Price">
+            </div>
 
-            <input name="input_note" type="hidden" class="input_note form-contrl" placeholder="Note">
+            <input name="input_note" type="text" class="input_note form-contrl" placeholder="Note" autofocus style="display: none;">
     </body>
 </html>
