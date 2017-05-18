@@ -2,30 +2,31 @@
 <html>
     <head>
         <title>Create Order</title>
+        <link rel="stylesheet" type="text/css" href="bootstrap/css/bootstrap.min.css">
         <link rel="stylesheet" type="text/css" href="../css/custom.css">
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+        <script src="bootstrap/js/bootstrap.js"></script>
         <script>
              $(document).ready(function() {
                 $('#category_selector').change(function(evt){
                     evt.preventDefault();
                     selected_item = $('#category_selector option:selected').text();
-                    // $(".form-control").hide()
-                    $('[name="input_title"]').hide();
+                    $('#input_title').hide();
                     $("#input_p").hide();
-                    $('[name="input_address"]').hide();
-                    $('[name="input_note"]').hide();
+                    $('#input_address').hide();
+                    $('#input_note').hide();
                     
                     if(selected_item === '标题') {
-                        $('[name="input_title"]').show();
+                        $('#input_title').show();
                     }
                     if(selected_item === '产品') {
                         $('#input_p').show();
                     }
                     if(selected_item ==='地址') {
-                        $('[name="input_address"]').show();
+                        $('#input_address').show();
                     }
                     if(selected_item === "备注") {
-                        $('[name="input_note"]').show();
+                        $('#input_note').show();
                     }
                 });
             });
@@ -41,7 +42,10 @@
                 <option value="note">备注</option>
             </select>
             <br><br>
-            <input name="input_title" type="text" class="form-control" placeholder="Order Title" required autofocus>
+            <div id="input_title">
+                <label>标题</label>
+                <input name="input_title" type="text" class="form-control" placeholder="Order Title" required autofocus>
+            </div>
 
             <div id="input_p" style="display: none;">
                 <label>产品名称</label><br>
@@ -60,22 +64,30 @@
                 <input name="input_p_price" type="number" class="form-control" placeholder="Product Price">
             </div>
 
-            <input name="input_address" type="text" class="product_input_form form-control" placeholder="邮寄地址" autofocus style="display: none;">
+            <div id="input_address" style="display: none;">
+                <label>邮寄地址</label><br>
+                <input type="text" class="product_input_form form-control" placeholder="邮寄地址" autofocus>
+            </div>
 
-            <input name="input_note" type="text" class="product_input_form form-contrl" placeholder="Note" autofocus style="display: none;">
+            <div id="input_note" style="display: none;">
+                <label>备注</label><br>
+                <input type="text" class="product_input_form form-contrl" placeholder="Note" autofocus>
+            </div>
+
+            <button 
 
             <br>
             <br>
             <div id="final_table">
                 <table id="order_table">
                     <colgroup>
-                        <col width="5%">
-                        <col width="15%">
-                        <col width="10%">
-                        <col width="10%">
-                        <col width="10%">
                         <col width="10%">
                         <col width="15%">
+                        <col width="10%">
+                        <col width="10%">
+                        <col width="10%">
+                        <col width="10%">
+                        <col width="10%">
                         <col width="25%">
                     </colgroup>
                     <thread>
