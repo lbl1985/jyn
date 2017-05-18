@@ -6,31 +6,7 @@
         <link rel="stylesheet" type="text/css" href="../css/custom.css">
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
         <script src="bootstrap/js/bootstrap.js"></script>
-        <script>
-             $(document).ready(function() {
-                $('#category_selector').change(function(evt){
-                    evt.preventDefault();
-                    selected_item = $('#category_selector option:selected').text();
-                    $('#input_title').hide();
-                    $("#input_p").hide();
-                    $('#input_address').hide();
-                    $('#input_note').hide();
-                    
-                    if(selected_item === '标题') {
-                        $('#input_title').show();
-                    }
-                    if(selected_item === '产品') {
-                        $('#input_p').show();
-                    }
-                    if(selected_item ==='地址') {
-                        $('#input_address').show();
-                    }
-                    if(selected_item === "备注") {
-                        $('#input_note').show();
-                    }
-                });
-            });
-        </script>
+        <script src="js/create_order_controller.js"></script>
     </head>
 
     <body>
@@ -74,7 +50,9 @@
                 <input type="text" class="product_input_form form-contrl" placeholder="Note" autofocus>
             </div>
 
-            <button 
+            <br>
+            <button type="button" class="btn btn-primary">ADD</button>
+            
 
             <br>
             <br>
