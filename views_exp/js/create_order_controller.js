@@ -1,6 +1,8 @@
 //<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 
 $(document).ready(function() {
+    $(['required="required"']).prev('label').append('<span>*</span>').children('span').addClass('required');
+
     $('#category_selector').change(function(evt){
         evt.preventDefault();
         selected_item = $('#category_selector option:selected').text();
@@ -22,4 +24,17 @@ $(document).ready(function() {
             $('#input_note').show();
         }
     });
+
+    (function($){
+        $.fn.extend({
+            toObject:function() {
+                console.log(this.serialize());
+            },
+            productToObject:function(){
+                // $.each($('#input_p').children().serializeArray(), function(i, v) {console.log(v.name + ":" + v.value)})
+            }
+        });
+    })(jQuery);
+
+    $('#input_p').children().serializeArray()
 });

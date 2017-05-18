@@ -10,7 +10,7 @@
     </head>
 
     <body>
-        <form>
+        <form id="createOrderForm">
             <select name="category" id="category_selector">
                 <option value="title">标题</option>
                 <option value="product">产品</option>
@@ -51,8 +51,9 @@
             </div>
 
             <br>
-            <button type="button" class="btn btn-primary">ADD</button>
+            <button id="btnAdd" type="button" class="btn btn-primary">ADD</button>
             
+        </form>
 
             <br>
             <br>
@@ -61,12 +62,13 @@
                     <colgroup>
                         <col width="10%">
                         <col width="15%">
-                        <col width="10%">
-                        <col width="10%">
-                        <col width="10%">
-                        <col width="10%">
-                        <col width="10%">
-                        <col width="25%">
+                        <col width="8%">
+                        <col width="8%">
+                        <col width="8%">
+                        <col width="8%">
+                        <col width="8%">
+                        <col width="20%">
+                        <col width="15%">
                     </colgroup>
                     <thread>
                         <tr>
@@ -78,8 +80,11 @@
                             <th>单价</th>
                             <th>金额</th>
                             <th>备注</th>
+                            <th>Actions</th>
                         </tr>
                     </thread>
+                    <tbody>
+                    </tbody>
                 </table>
             </div>
     </body>
