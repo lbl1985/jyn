@@ -34,13 +34,10 @@ $(document).ready(function() {
                 obj = {}
                 $.each($(this).children().serializeArray(), function(i, v){
                     obj[v.name] = v.value;
-                    // console.log(v.name + ": " + v.value);
                 })
                 return obj;
-                // $.each($('#input_p').children().serializeArray(), function(i, v) {console.log(v.name + ":" + v.value)})
             }
         });
     })(jQuery);
 
-    $('#input_p').children().serializeArray()
 });

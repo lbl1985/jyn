@@ -6,6 +6,7 @@
         <link rel="stylesheet" type="text/css" href="../css/custom.css">
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
         <script src="bootstrap/js/bootstrap.js"></script>
+        <script src="js/jsrender.js"></script>
         <script src="js/create_order_controller.js"></script>
     </head>
 
@@ -87,5 +88,20 @@
                     </tbody>
                 </table>
             </div>
+            <div id="testTemplate">
+            </div>
     </body>
+    <script id="test" type="text/x-jsrender">
+        {{:name}}
+    </script>
+    
+    <script>
+        var tmpl = $.templates("#test");
+        var data={name: "Binlong"};
+        var html = tmpl.render(data);
+        $("#testTemplate").html(html)
+    </script>
+    <!--refer to stackflow page: 
+    http://stackoverflow.com/questions/10413894/store-a-jsrender-template-in-a-separate-js-file
+    -->
 </html>
