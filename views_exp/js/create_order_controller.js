@@ -31,6 +31,12 @@ $(document).ready(function() {
                 console.log(this.serialize());
             },
             productToObject:function(){
+                obj = {}
+                $.each($(this).children().serializeArray(), function(i, v){
+                    obj[v.name] = v.value;
+                    // console.log(v.name + ": " + v.value);
+                })
+                return obj;
                 // $.each($('#input_p').children().serializeArray(), function(i, v) {console.log(v.name + ":" + v.value)})
             }
         });
