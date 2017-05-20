@@ -1,4 +1,11 @@
-//<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+var renderExternalTmpl = function(item) {
+    var file = 'C:/Experiment/javaScript/jyn/views_exp/templates/_' + item.name + ".tmpl.html";
+    $.when($.get(file))
+        .done(function(templDate) {
+            var tmpl = $.templates(templDate);
+            $(item.selector).html(tmpl.render(item.data));
+        });
+}
 
 $(document).ready(function() {
     $(['required="required"']).prev('label').append('<span>*</span>').children('span').addClass('required');
@@ -22,7 +29,11 @@ $(document).ready(function() {
         }
         if(selected_item === "备注") {
             $('#input_note').show();
+            var item = {name:"productRow", selector:"#testTemplate", data:{name:"Binlong_Minjie"}};
+            renderExternalTmpl(item);
         }
+
+        
     });
 
     (function($){
@@ -40,4 +51,5 @@ $(document).ready(function() {
         });
     })(jQuery);
 
+    
 });
