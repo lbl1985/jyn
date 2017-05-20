@@ -1,3 +1,4 @@
+// This jquery need lots of refactoring...
 var renderExternalTmpl = function(item) {
     var file = 'C:/Experiment/javaScript/jyn/views_exp/templates/' + item.name + ".tmpl.html";
     $.when($.get(file))
