@@ -54,14 +54,29 @@ $(document).ready(function() {
         $(evt.target).parents('tr').remove();
     });
 
+    $('#order_table tbody').on('click', '.editRow', function(evt) {
+        evt.preventDefault();
+        row_product = $(evt.target).parents('tr').productRowToObject();
+        $.each($('#input_p input'), function(i, v){
+            $(v).val(row_product[i])
+        })
+    })
+
     var itemId = 0;
     (function($){
         $.fn.extend({
             toObject:function() {
                 console.log(this.serialize());
             },
+            productRowToObject:function() {
+                var arr = []
+                $.each($(this).children().slice(1, -1), function(i, v){
+                    arr.push($(v).html());
+                })
+                return arr;
+            },
             productToObject:function(){
-                obj = {}
+                var obj = {}
                 $.each($(this).children().serializeArray(), function(i, v){
                     obj[v.name] = v.value;
                 })

@@ -16,3 +16,8 @@
 #co_h2 {
     text-align: center;
 }
+
+#final_table{
+    max-width: 600px;
+    margin:auto;
+}
