@@ -3,7 +3,11 @@ var renderExternalTmpl = function(item) {
     $.when($.get(file))
         .done(function(templDate) {
             var tmpl = $.templates(templDate);
-            $(item.selector).html(tmpl.render(item.data));
+            if (item.selector === "#order_table" && item.name === "productRow") {
+                $(item.selector).append(tmpl.render(item.data));
+            } else {
+                $(item.selector).html(tmpl.render(item.data));
+            }
         });
 }
 
@@ -32,7 +36,14 @@ $(document).ready(function() {
             var item = {name:"template_test", selector:"#testTemplate", data:{name:"Binlong_Minjie"}};
             renderExternalTmpl(item);
         }
+    });
 
+    var itemId = 0;
+    $('#btnAdd').click(function(evt) {
+        evt.preventDefault();
+        var product = $("#input_p").productToObject();
+        var item = {name:"productRow", selector:"#order_table", data:product};
+        renderExternalTmpl(item);
     });
 
     (function($){
