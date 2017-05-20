@@ -3,8 +3,15 @@ var renderExternalTmpl = function(item) {
     $.when($.get(file))
         .done(function(templDate) {
             var tmpl = $.templates(templDate);
-            if (item.selector === "#order_table" && item.name === "productRow") {
-                $(item.selector).append(tmpl.render(item.data));
+            if (item.name === "productRow") {
+                if (item.selector === "#order_table") {
+                    $(item.selector).append(tmpl.render(item.data));
+                } else {
+                    rendered_array = $(tmpl.render(item.data)).children();
+                    $.each($(item.selector), function(i, v) {
+                        $(v).html($(rendered_array[i]).html());
+                    })
+                }
             } else {
                 $(item.selector).html(tmpl.render(item.data));
             }
@@ -12,6 +19,8 @@ var renderExternalTmpl = function(item) {
 }
 
 $(document).ready(function() {
+    var currentRow = {};
+
     $(['required="required"']).prev('label').append('<span>*</span>').children('span').addClass('required');
 
     $('#category_selector').change(function(evt){
@@ -38,15 +47,25 @@ $(document).ready(function() {
 
     $('#btnAdd').click(function(evt) {
         evt.preventDefault();
+        var buttonStatus = $('#btnAdd').html();
         var product = $("#input_p").productToObject();
         product['p_totalPrice'] = product['p_price'] * product['p_quantity'];
-        var item = {name:"productRow", selector:"#order_table", data:product};
+        var selectorCase;
+        if (buttonStatus === "ADD") {
+            selectorCase = "#order_table";
+        } else {
+            selectorCase = currentRow;
+        }
+        var item = {name:"productRow", selector:selectorCase, data:product};
         renderExternalTmpl(item);
         $('#input_p input').each(function(){
             // $(this).removeAttr('value');
             $(this).val('');
         })
         $('[name="p_name"]').focus();
+        if (buttonStatus === 'UPDATE') {
+            $('#btnAdd').html('ADD');
+        }
     });
 
     $('#order_table tbody').on('click', '.deleteRow', function(evt) {
@@ -56,10 +75,13 @@ $(document).ready(function() {
 
     $('#order_table tbody').on('click', '.editRow', function(evt) {
         evt.preventDefault();
-        row_product = $(evt.target).parents('tr').productRowToObject();
+        currentTr = $(evt.target).parents('tr');
+        currentRow = currentTr.children();
+        row_product = currentTr.productRowToObject();
         $.each($('#input_p input'), function(i, v){
             $(v).val(row_product[i])
         })
+        $('#btnAdd').html('UPDATE');
     })
 
     var itemId = 0;
@@ -85,5 +107,4 @@ $(document).ready(function() {
         });
     })(jQuery);
 
-    
 });
