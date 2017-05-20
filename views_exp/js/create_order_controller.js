@@ -1,5 +1,5 @@
 var renderExternalTmpl = function(item) {
-    var file = 'C:/Experiment/javaScript/jyn/views_exp/templates/_' + item.name + ".tmpl.html";
+    var file = 'C:/Experiment/javaScript/jyn/views_exp/templates/' + item.name + ".tmpl.html";
     $.when($.get(file))
         .done(function(templDate) {
             var tmpl = $.templates(templDate);
@@ -29,11 +29,10 @@ $(document).ready(function() {
         }
         if(selected_item === "备注") {
             $('#input_note').show();
-            var item = {name:"productRow", selector:"#testTemplate", data:{name:"Binlong_Minjie"}};
+            var item = {name:"template_test", selector:"#testTemplate", data:{name:"Binlong_Minjie"}};
             renderExternalTmpl(item);
         }
 
-        
     });
 
     (function($){
