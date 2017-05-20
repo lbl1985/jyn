@@ -46,6 +46,7 @@ $(document).ready(function() {
             // $(this).removeAttr('value');
             $(this).val('');
         })
+        $('[name="p_name"]').focus();
     });
 
     $('#order_table tbody').on('click', '.deleteRow', function(evt) {
