@@ -42,6 +42,10 @@ $(document).ready(function() {
         product['p_totalPrice'] = product['p_price'] * product['p_quantity'];
         var item = {name:"productRow", selector:"#order_table", data:product};
         renderExternalTmpl(item);
+        $('#input_p input').each(function(){
+            // $(this).removeAttr('value');
+            $(this).val('');
+        })
     });
 
     $('#order_table tbody').on('click', '.deleteRow', function(evt) {
