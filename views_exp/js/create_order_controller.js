@@ -36,7 +36,6 @@ $(document).ready(function() {
         }
     });
 
-    var itemId = 0;
     $('#btnAdd').click(function(evt) {
         evt.preventDefault();
         var product = $("#input_p").productToObject();
@@ -45,6 +44,12 @@ $(document).ready(function() {
         renderExternalTmpl(item);
     });
 
+    $('#order_table tbody').on('click', '.deleteRow', function(evt) {
+        evt.preventDefault();
+        $(evt.target).parents('tr').remove();
+    });
+
+    var itemId = 0;
     (function($){
         $.fn.extend({
             toObject:function() {
