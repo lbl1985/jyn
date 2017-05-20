@@ -92,9 +92,10 @@ $(document).ready(function() {
             },
             productRowToObject:function() {
                 var arr = []
-                $.each($(this).children().slice(1, -1), function(i, v){
+                $.each($(this).children().slice(1, -3), function(i, v){
                     arr.push($(v).html());
                 })
+                arr.push($($(this).children().slice(7, -1)).html());
                 return arr;
             },
             productToObject:function(){
