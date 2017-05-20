@@ -31,10 +31,8 @@ $(document).ready(function() {
         if(selected_item ==='地址') {
             $('#input_address').show();
         }
-        if(selected_item === "备注") {
+        if(selected_item === "订单备注") {
             $('#input_note').show();
-            var item = {name:"template_test", selector:"#testTemplate", data:{name:"Binlong_Minjie"}};
-            renderExternalTmpl(item);
         }
     });
 
@@ -42,6 +40,7 @@ $(document).ready(function() {
     $('#btnAdd').click(function(evt) {
         evt.preventDefault();
         var product = $("#input_p").productToObject();
+        product['p_totalPrice'] = product['p_price'] * product['p_quantity'];
         var item = {name:"productRow", selector:"#order_table", data:product};
         renderExternalTmpl(item);
     });
