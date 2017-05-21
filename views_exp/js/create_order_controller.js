@@ -28,6 +28,8 @@ var addProductToOrderTable = function(currentRow) {
         product['p_itemId'] = $('#order_table tr').length;
         selectorCase = "#order_table";
     } else {
+        // update will keep the itemId unchanged.
+        product['p_itemId'] = $(currentRow[0]).text();
         selectorCase = currentRow;
     }
     var item = {name:"productRow", selector:selectorCase, data:product};
