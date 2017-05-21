@@ -43,6 +43,10 @@ var addProductToOrderTable = function(currentRow) {
     }
 }
 
+var addOrderTitle = function() {
+    $('#order_title').text($('[name="input_title"]').val());
+}
+
 $(document).ready(function() {
     var currentRow = {};
 
@@ -75,8 +79,18 @@ $(document).ready(function() {
         selected_item = $('#category_selector option:selected').text();
         if (selected_item === '产品'){
             addProductToOrderTable(currentRow);
+        } else if (selected_item === '标题') {
+            addOrderTitle();
         }
     });
+
+    $('#order_title').on('dblclick', function(evt){
+        evt.preventDefault();
+        $('#category_selector option:selected').text('标题');
+        $('#category_selector').change();
+        $('#input_title').focus();
+        $('#btnAdd').html('UPDATE');
+    })
 
     $('#order_table tbody').on('click', 'td', function(evt){
         evt.preventDefault();
