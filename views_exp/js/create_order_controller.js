@@ -25,6 +25,7 @@ var addProductToOrderTable = function(currentRow) {
     product['p_totalPrice'] = product['p_price'] * product['p_quantity'];
     var selectorCase;
     if (buttonStatus === "ADD") {
+        product['p_itemId'] = $('#order_table tr').length;
         selectorCase = "#order_table";
     } else {
         selectorCase = currentRow;
