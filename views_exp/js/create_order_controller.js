@@ -77,16 +77,7 @@ $(document).ready(function() {
         
     });
 
-    $('#order_table tbody').on('click', 'td', function() {
-        alert($(this).text());
-    })
-
-    $('#order_table tbody').on('click', '.deleteRow', function(evt) {
-        evt.preventDefault();
-        $(evt.target).parents('tr').remove();
-    });
-
-    $('#order_table tbody').on('click', '.editRow', function(evt) {
+    $('#order_table tbody').on('click', 'td', function(evt) {
         evt.preventDefault();
         currentTr = $(evt.target).parents('tr');
         currentRow = currentTr.children();
@@ -95,7 +86,27 @@ $(document).ready(function() {
             $(v).val(row_product[i])
         })
         $('#btnAdd').html('UPDATE');
+        inputColumnName = $(evt.target).attr('class');
+        inputColumnSelector = '[name="' + inputColumnName + '"]';
+        $(inputColumnSelector).focus();
     })
+
+    $('#order_table tbody').on('click', '.deleteRow', function(evt) {
+        evt.preventDefault();
+        $(evt.target).parents('tr').remove();
+    });
+
+    // $('#order_table tbody').on('click', '.editRow', function(evt) {
+    //     evt.preventDefault();
+    //     currentTr = $(evt.target).parents('tr');
+    //     currentRow = currentTr.children();
+    //     row_product = currentTr.productRowToObject();
+    //     $.each($('#input_p input'), function(i, v){
+    //         $(v).val(row_product[i])
+    //     })
+    //     $('#btnAdd').html('UPDATE');
+    //     $('[name="p_name"]').focus();
+    // })
 
     var itemId = 0;
     (function($){
