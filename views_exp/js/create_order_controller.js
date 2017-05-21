@@ -77,6 +77,10 @@ $(document).ready(function() {
         
     });
 
+    $('#order_table tbody').on('click', 'td', function() {
+        alert($(this).text());
+    })
+
     $('#order_table tbody').on('click', '.deleteRow', function(evt) {
         evt.preventDefault();
         $(evt.target).parents('tr').remove();
