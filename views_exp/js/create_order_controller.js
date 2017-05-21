@@ -77,7 +77,7 @@ $(document).ready(function() {
         
     });
 
-    $('#order_table tbody').on('click', 'td', function(evt) {
+    $('#order_table tbody').on('dblclick', 'td', function(evt) {
         evt.preventDefault();
         currentTr = $(evt.target).parents('tr');
         currentRow = currentTr.children();
