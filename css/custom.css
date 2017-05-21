@@ -8,6 +8,10 @@
     margin:auto;
 }
 
+.rowHighlight {
+    background-color: lightblue;
+}
+
 #login_submit {
     max-width: 100;
     margin: auto;

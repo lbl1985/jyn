@@ -74,8 +74,16 @@ $(document).ready(function() {
         if (selected_item === '产品'){
             addProductToOrderTable(currentRow);
         }
-        
     });
+
+    $('#order_table tbody').on('click', 'td', function(evt){
+        evt.preventDefault();
+        $($(evt.target).parent('tr')[0]).toggleClass('rowHighlight');
+    });
+
+    // $('#order_table tbody tr').click(function(evt){
+    //     $(evt.target).closet('td').siblings().andSelf().toggleClass('rowHighLight');
+    // });
 
     $('#order_table tbody').on('dblclick', 'td', function(evt) {
         evt.preventDefault();
