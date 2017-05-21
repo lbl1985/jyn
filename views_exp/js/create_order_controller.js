@@ -33,7 +33,6 @@ var addProductToOrderTable = function(currentRow) {
     var item = {name:"productRow", selector:selectorCase, data:product};
     renderExternalTmpl(item);
     $('#input_p input').each(function(){
-        // $(this).removeAttr('value');
         $(this).val('');
     })
     $('[name="p_name"]').focus();
@@ -103,19 +102,11 @@ $(document).ready(function() {
     $('#order_table tbody').on('click', '.deleteRow', function(evt) {
         evt.preventDefault();
         $(evt.target).parents('tr').remove();
+        // update the product id number
+        $.each($('#order_table tbody td.p_itemId'), function(i, v) {
+            $(v).text(i+1)
+        });
     });
-
-    // $('#order_table tbody').on('click', '.editRow', function(evt) {
-    //     evt.preventDefault();
-    //     currentTr = $(evt.target).parents('tr');
-    //     currentRow = currentTr.children();
-    //     row_product = currentTr.productRowToObject();
-    //     $.each($('#input_p input'), function(i, v){
-    //         $(v).val(row_product[i])
-    //     })
-    //     $('#btnAdd').html('UPDATE');
-    //     $('[name="p_name"]').focus();
-    // })
 
     var itemId = 0;
     (function($){
