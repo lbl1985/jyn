@@ -19,6 +19,28 @@ var renderExternalTmpl = function(item) {
         });
 }
 
+var addProductToOrderTable = function(currentRow) {
+    var buttonStatus = $('#btnAdd').html();
+    var product = $("#input_p").productToObject();
+    product['p_totalPrice'] = product['p_price'] * product['p_quantity'];
+    var selectorCase;
+    if (buttonStatus === "ADD") {
+        selectorCase = "#order_table";
+    } else {
+        selectorCase = currentRow;
+    }
+    var item = {name:"productRow", selector:selectorCase, data:product};
+    renderExternalTmpl(item);
+    $('#input_p input').each(function(){
+        // $(this).removeAttr('value');
+        $(this).val('');
+    })
+    $('[name="p_name"]').focus();
+    if (buttonStatus === 'UPDATE') {
+        $('#btnAdd').html('ADD');
+    }
+}
+
 $(document).ready(function() {
     var currentRow = {};
 
@@ -48,25 +70,11 @@ $(document).ready(function() {
 
     $('#btnAdd').click(function(evt) {
         evt.preventDefault();
-        var buttonStatus = $('#btnAdd').html();
-        var product = $("#input_p").productToObject();
-        product['p_totalPrice'] = product['p_price'] * product['p_quantity'];
-        var selectorCase;
-        if (buttonStatus === "ADD") {
-            selectorCase = "#order_table";
-        } else {
-            selectorCase = currentRow;
+        selected_item = $('#category_selector option:selected').text();
+        if (selected_item === '产品'){
+            addProductToOrderTable(currentRow);
         }
-        var item = {name:"productRow", selector:selectorCase, data:product};
-        renderExternalTmpl(item);
-        $('#input_p input').each(function(){
-            // $(this).removeAttr('value');
-            $(this).val('');
-        })
-        $('[name="p_name"]').focus();
-        if (buttonStatus === 'UPDATE') {
-            $('#btnAdd').html('ADD');
-        }
+        
     });
 
     $('#order_table tbody').on('click', '.deleteRow', function(evt) {
