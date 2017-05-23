@@ -1,22 +1,106 @@
 extends ./layout.pug
+block otherScripts
+    <script src="js/jsrender.js"></script>
+    <script src="js/create_order_controller.js"></script>
 block body
     h2(id="co_h2") 创建订单
-    <form action="/create_order" method="post">
-        <input name="title" type="text" class="form-control" placeholder="Order Name" autofocus>
-        br
-        br
-        #product
-            input(name="p_name" type="text" class="form-control" placeholder="Produce Name")
-            br
-            input(name="p_model" type="text" class="form-control" placeholder="Produce Model")
-            br
-            input(name="quantity" type="number" class="form-control" placeholder="Quantity")
-            br
-            input(name="unit" type="number" class="form-control" placeholder="Unit")
-            br
-            input(name="unit_price" type="number" class="form-control" placeholder="Unit Price")
-            br
-            input(name="note" type="text" class="form-control" placeholder="Note")
-            br
+    
+    form#createOrderForm
+        - var displayNone={"display":"none"}
+        select#category_selector.form-control(
+            name='category'
+        )
+            option(value='title') 标题
+            option(value='product') 产品
+            option(value='address') 地址
+            option(value='note') 订单备注
 
-    </form>
+        br
+        br
+        #input_title
+            label 标题
+            input.form-control(name="input_title" type="text" placeholder="Order Title" required autofocus)
+        #input_p(style=displayNone)
+            label 产品名称
+            br
+            input.form-control(name="p_name" type="text" placeholder="Proudct Name" autofocus)
+            br
+            label 型号
+            input.form-control(name="p_model" type="text" class="form-control" placeholder="Product Model")
+            br
+            label 数量
+            input.form-control(name="p_quantity" type="number" class="form-control" placeholder="Product Quantity")
+            br
+            label 单位
+            input.form-control(name="p_unit" type="text" class="form-control" placeholder="Product Unit")
+            br
+            label 单价
+            input.form-control(name="p_price" type="number" class="form-control" placeholder="Product Price")
+            br
+            label 备注
+            input.form-control(name="p_note" type="text" class="form-control" placeholder="更换")
+
+        #input_address(style=displayNone)
+            label 邮寄地址
+            input(class=['product_input_form', 'form-control'] name="input_address" type="text" placeholder="邮寄地址" autofocus )
+
+        #input_note(style=displayNone)
+            label 订单备注
+            input(class=['product_input_form', 'form-contrl'] name="input_note" type="text" placeholder="Note" autofocus)
+
+        br
+        button#btnAdd(class=['btn', 'btn-primary', 'add'] type="button") ADD
+
+    br
+    br
+    #final_table(style={margin:auto})
+        p#order_title
+        table#order_table
+            colgroup
+                col(width="10%")
+                col(width="15%")
+                col(width="8%")
+                col(width="8%")
+                col(width="8%")
+                col(width="8%")
+                col(width="8%")
+                col(width="20%")
+                col(width="15%")
+            thead
+                tr
+                    th 序号
+                    th 产品名称
+                    th 型号
+                    th 数量
+                    th 单位
+                    th 单价
+                    th 金额
+                    th 备注
+                    th Actions
+            tbody
+    p#order_address
+    p#order_signature
+    p#order_note
+
+    
+            
+
+    //- <form id="createOrderForm">
+    //-     <input name="title" type="text" class="form-control" placeholder="Order Name" autofocus>
+    //-     br
+    //-     br
+    //-     #product
+    //-         input(name="p_name" type="text" class="form-control" placeholder="Produce Name")
+    //-         br
+    //-         input(name="p_model" type="text" class="form-control" placeholder="Produce Model")
+    //-         br
+    //-         input(name="quantity" type="number" class="form-control" placeholder="Quantity")
+    //-         br
+    //-         input(name="unit" type="number" class="form-control" placeholder="Unit")
+    //-         br
+    //-         input(name="unit_price" type="number" class="form-control" placeholder="Unit Price")
+    //-         br
+    //-         input(name="note" type="text" class="form-control" placeholder="Note")
+    //-         br
+
+    //- </form>
