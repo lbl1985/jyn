@@ -40,11 +40,23 @@ var addProductToOrderTable = function(currentRow) {
     $('[name="p_name"]').focus();
     if (buttonStatus === 'UPDATE') {
         $('#btnAdd').html('ADD');
-    }
+    } 
 }
 
-var addOrderTitle = function() {
-    $('#order_title').text($('[name="input_title"]').val());
+var addOrderTitle = function(t) {
+    $('#order_' + t).text($('[name="input_' + t + '"]').val());
+    var buttonStatus = $('#btnAdd').html();
+    if (buttonStatus === 'ADD') {
+        if (t === 'title') {
+            $('#category_selector option:selected').text('产品');
+            $('#category_selector').change();
+            $('[name="p_name"]').focus();
+        } else if (t === 'address') {
+            $('#category_selector option:selected').text('订单备注');
+            $('#category_selector').change();
+            $('div[name="input_note"]').focus();
+        }
+    }
 }
 
 $(document).ready(function() {
@@ -78,9 +90,13 @@ $(document).ready(function() {
         evt.preventDefault();
         selected_item = $('#category_selector option:selected').text();
         if (selected_item === '产品'){
-            addProductToOrderTable(currentRow);
+            addProductToOrderTable(currentRow);            
         } else if (selected_item === '标题') {
-            addOrderTitle();
+            addOrderTitle('title');
+        } else if (selected_item === '地址') {
+            addOrderTitle('address');
+        } else if (selected_item === '订单备注') {
+            addOrderTitle('note');
         }
     });
 
@@ -90,7 +106,23 @@ $(document).ready(function() {
         $('#category_selector').change();
         $('#input_title').focus();
         $('#btnAdd').html('UPDATE');
-    })
+    });
+
+    $('#order_address').on('dblclick', function(evt){
+        evt.preventDefault();
+        $('#category_selector option:selected').text('地址');
+        $('#category_selector').change();
+        $('#input_address').focus();
+        $('#btnAdd').html('UPDATE');
+    });
+
+    $('#order_note').on('dblclick', function(evt){
+        evt.preventDefault();
+        $('#category_selector option:selected').text('订单备注');
+        $('#category_selector').change();
+        $('#input_note').focus();
+        $('#btnAdd').html('UPDATE');
+    });
 
     $('#order_table tbody').on('click', 'td', function(evt){
         evt.preventDefault();
@@ -106,6 +138,10 @@ $(document).ready(function() {
         currentTr = $(evt.target).parents('tr');
         currentRow = currentTr.children();
         row_product = currentTr.productRowToObject();
+
+        $('#category_selector option:selected').text('产品');
+        $('#category_selector').change();
+        
         $.each($('#input_p input'), function(i, v){
             $(v).val(row_product[i])
         })
