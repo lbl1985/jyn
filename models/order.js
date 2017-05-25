@@ -3,6 +3,7 @@
 var mongoose = require('mongoose');
 
 var productSchema = mongoose.Schema({
+    itemId: {type: Number, required: true},
     productName: {type: String, required: true},
     model: {type: String},
     quantity: {type: Number, required: true},

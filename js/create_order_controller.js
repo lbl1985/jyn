@@ -100,6 +100,17 @@ $(document).ready(function() {
         }
     });
 
+    $('#btnSubmit').click(function(evt) {
+        evt.preventDefault();
+        var order = {};
+        order["title"] = $('#order_title').text();
+        order["ship_add"] = $('order_address').text();
+        order["note"] = $('order_note').text();
+        var products = [];
+        $.each()
+
+    })
+
     $('#order_title').on('dblclick', function(evt){
         evt.preventDefault();
         $('#category_selector option:selected').text('标题');
@@ -137,7 +148,7 @@ $(document).ready(function() {
         evt.preventDefault();
         currentTr = $(evt.target).parents('tr');
         currentRow = currentTr.children();
-        row_product = currentTr.productRowToObject();
+        row_product = currentTr.productRowToArray();
 
         $('#category_selector option:selected').text('产品');
         $('#category_selector').change();
@@ -166,13 +177,44 @@ $(document).ready(function() {
             toObject:function() {
                 console.log(this.serialize());
             },
-            productRowToObject:function() {
+            productRowToArray:function() {
                 var arr = []
                 $.each($(this).children().slice(1, -3), function(i, v){
                     arr.push($(v).html());
                 })
                 arr.push($($(this).children().slice(7, -1)).html());
                 return arr;
+            },
+            productRowToObject:function() {
+                var obj = {}
+                $.each($(this).children(), function(i, v){
+                    switch ($(v).attr('class')) {
+                        case 'p_itemId':
+                            obj['itemId'] = $(v).text();
+                            break;
+                        case 'p_name':
+                            obj['productName'] = $(v).text();
+                            break;
+                        case 'p_model':
+                            obj['model'] = $(v).text();
+                            break;
+                        case 'p_quantity':
+                            obj['quantity'] = $(v).text();
+                            break;
+                        case 'p_unit':
+                            obj['unit'] = $(v).text();
+                            break;
+                        case 'p_price':
+                            obj['unit_price'] = $(v).text();
+                            break;
+                        case 'p_totalPrice':
+                            obj['price'] = $(v).text();
+                            break;
+                        case 'p_note':
+                            obj['note'] = $(v).text();
+                            break;
+                    }
+                });
             },
             productToObject:function(){
                 var obj = {}

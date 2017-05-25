@@ -100,6 +100,12 @@ $(document).ready(function() {
         }
     });
 
+    $('#btnSubmit').click(function(evt) {
+        evt.preventDefault();
+        var product = {}
+        
+    })
+
     $('#order_title').on('dblclick', function(evt){
         evt.preventDefault();
         $('#category_selector option:selected').text('标题');
