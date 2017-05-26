@@ -1,8 +1,9 @@
 // This jquery need lots of refactoring...
-var renderExternalTmpl = function(item) {
+var renderExternalTmpl = function (item) {
+    'use strict';
     var file = '/templates/' + item.name + ".tmpl.html";
     $.when($.get(file))
-        .done(function(templDate) {
+        .done(function (templDate) {
             var tmpl = $.templates(templDate);
             if (item.name === "productRow") {
                 if (item.selector === "#order_table") {
@@ -17,7 +18,7 @@ var renderExternalTmpl = function(item) {
                 $(item.selector).html(tmpl.render(item.data));
             }
         });
-}
+};
 
 var addProductToOrderTable = function(currentRow) {
     var buttonStatus = $('#btnAdd').html();
@@ -57,6 +58,17 @@ var addOrderTitle = function(t) {
             $('div[name="input_note"]').focus();
         }
     }
+}
+
+var getGuid = function guid() {
+    'use strict';
+    function s4() {
+        return Math.floor((1 + Math.random()) * 0x10000)
+            .toString(16)
+            .substring(1);
+    }
+    return s4() + s4() + '-' + s4() + '-' + s4() + '-' +
+            s4() + '-' + s4() + s4() + s4();
 }
 
 $(document).ready(function() {
@@ -103,6 +115,7 @@ $(document).ready(function() {
     $('#btnSubmit').click(function(evt) {
         evt.preventDefault();
         var order = {};
+        order.uuid = getGuid();
         order.title = $('#order_title').text();
         order.ship_add = $('order_address').text();
         order.note = $('order_note').text();
@@ -111,6 +124,17 @@ $(document).ready(function() {
             products.push( $(v).productRowToObject());
         });
         order.products = products;
+        $.ajax({
+            type: "POST",
+            url: "/create_order",
+            data: JSON.stringify({order: order}),
+            contentType: "application/json; charset=utf-8",
+            dataType: "json",
+            success: function (data){alert(data);},
+            failure: function (errMsg) {
+                alert(errMsg);
+            }
+        });
     });
 
     $('#order_title').on('dblclick', function (evt) {

@@ -4,6 +4,7 @@ var express = require("express");
 var router = express.Router();
 var passport = require("passport");
 var User = require("../models/user");
+var Order = require("../models/order");
 
 router.use(function (req, res, next) {
     res.locals.currentUser = req.user;
@@ -104,29 +105,30 @@ router.get("/create_order", ensureAuthenticated, function (req, res) {
     res.render("create_order", {options: req.app.locals});
 });
 
-router.post("/signup", function (req, res, next) {
-    var username = req.body.username;
-    var password = req.body.password;
-    var company = req.body.company;
-    var Group = req.body.Group;
+router.post("/create_order", function (req, res, next) {
+    console.log(req);
+    // var username = req.body.username;
+    // var password = req.body.password;
+    // var company = req.body.company;
+    // var Group = req.body.Group;
 
-    User.findOne({username: username}, function (err, user) {
-        if (err) {
-            return next(err);
-        }
-        if (user) {
-            req.flash("error", "User already exists");
-            return res.redirect("/signup");
-        }
-        var newUser = new User({
-            username: username,
-            password: password,
-            company: company,
-            Group: Group
-        });
-        newUser.save();
-        return res.redirect("/");
-    });
+    // User.findOne({username: username}, function (err, user) {
+    //     if (err) {
+    //         return next(err);
+    //     }
+    //     if (user) {
+    //         req.flash("error", "User already exists");
+    //         return res.redirect("/signup");
+    //     }
+    //     var newUser = new User({
+    //         username: username,
+    //         password: password,
+    //         company: company,
+    //         Group: Group
+    //     });
+    //     newUser.save();
+    //     return res.redirect("/");
+    // });
 });
 
 
