@@ -107,6 +107,22 @@ router.get("/create_order", ensureAuthenticated, function (req, res) {
 
 router.post("/create_order", function (req, res, next) {
     console.log(req);
+    var order = req.body.order;
+    var newOrder = new Order({
+        uuid: order.uuid,
+        title: order.title,
+        products: order.products,
+        ship_add: order.ship_add,
+        company: "Other Company",
+        company_src: "QD Jieyina",
+        note: order.note
+    });
+    newOrder.save(function(err, res){
+        if (err) {
+            return console.error(err);
+        }
+    });
+    res.send({status:'Success'});
     // var username = req.body.username;
     // var password = req.body.password;
     // var company = req.body.company;

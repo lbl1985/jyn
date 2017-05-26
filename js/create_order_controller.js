@@ -117,8 +117,8 @@ $(document).ready(function() {
         var order = {};
         order.uuid = getGuid();
         order.title = $('#order_title').text();
-        order.ship_add = $('order_address').text();
-        order.note = $('order_note').text();
+        order.ship_add = $('#order_address').text();
+        order.note = $('#order_note').text();
         var products = [];
         $.each($('#order_table tbody tr'), function (i, v) {
             products.push( $(v).productRowToObject());
