@@ -103,15 +103,17 @@ $(document).ready(function() {
     $('#btnSubmit').click(function(evt) {
         evt.preventDefault();
         var order = {};
-        order["title"] = $('#order_title').text();
-        order["ship_add"] = $('order_address').text();
-        order["note"] = $('order_note').text();
+        order.title = $('#order_title').text();
+        order.ship_add = $('order_address').text();
+        order.note = $('order_note').text();
         var products = [];
-        $.each()
+        $.each($('#order_table tbody tr'), function (i, v) {
+            products.push( $(v).productRowToObject());
+        });
+        order.products = products;
+    });
 
-    })
-
-    $('#order_title').on('dblclick', function(evt){
+    $('#order_title').on('dblclick', function (evt) {
         evt.preventDefault();
         $('#category_selector option:selected').text('标题');
         $('#category_selector').change();
@@ -215,6 +217,7 @@ $(document).ready(function() {
                             break;
                     }
                 });
+                return obj;
             },
             productToObject:function(){
                 var obj = {}

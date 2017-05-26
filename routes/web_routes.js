@@ -104,5 +104,30 @@ router.get("/create_order", ensureAuthenticated, function (req, res) {
     res.render("create_order", {options: req.app.locals});
 });
 
+router.post("/signup", function (req, res, next) {
+    var username = req.body.username;
+    var password = req.body.password;
+    var company = req.body.company;
+    var Group = req.body.Group;
+
+    User.findOne({username: username}, function (err, user) {
+        if (err) {
+            return next(err);
+        }
+        if (user) {
+            req.flash("error", "User already exists");
+            return res.redirect("/signup");
+        }
+        var newUser = new User({
+            username: username,
+            password: password,
+            company: company,
+            Group: Group
+        });
+        newUser.save();
+        return res.redirect("/");
+    });
+});
+
 
 module.exports = router;
