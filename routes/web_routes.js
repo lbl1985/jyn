@@ -105,7 +105,7 @@ router.get("/create_order", ensureAuthenticated, function (req, res) {
     res.render("create_order", {options: req.app.locals});
 });
 
-router.post("/create_order", function (req, res, next) {
+router.post("/create_order", function (req, response, next) {
     console.log(req);
     var order = req.body.order;
     var newOrder = new Order({
@@ -117,34 +117,18 @@ router.post("/create_order", function (req, res, next) {
         company_src: "QD Jieyina",
         note: order.note
     });
+    // var status = "Success";
     newOrder.save(function(err, res){
         if (err) {
-            return console.error(err);
+            return response.send({status: 'Failure'});
+            // status = "Failures";
+            // return res.send({status: 'Failures'});
+            // return console.error(err);
+        } else {
+            return response.send({status: 'Success'});
         }
     });
-    res.send({status:'Success'});
-    // var username = req.body.username;
-    // var password = req.body.password;
-    // var company = req.body.company;
-    // var Group = req.body.Group;
-
-    // User.findOne({username: username}, function (err, user) {
-    //     if (err) {
-    //         return next(err);
-    //     }
-    //     if (user) {
-    //         req.flash("error", "User already exists");
-    //         return res.redirect("/signup");
-    //     }
-    //     var newUser = new User({
-    //         username: username,
-    //         password: password,
-    //         company: company,
-    //         Group: Group
-    //     });
-    //     newUser.save();
-    //     return res.redirect("/");
-    // });
+    // res.send({status: status});
 });
 
 
