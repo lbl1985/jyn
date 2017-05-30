@@ -106,7 +106,6 @@ router.get("/create_order", ensureAuthenticated, function (req, res) {
 });
 
 router.post("/create_order", function (req, response, next) {
-    console.log(req);
     var order = req.body.order;
     var newOrder = new Order({
         uuid: order.uuid,
@@ -117,18 +116,22 @@ router.post("/create_order", function (req, response, next) {
         company_src: "QD Jieyina",
         note: order.note
     });
-    // var status = "Success";
-    newOrder.save(function(err, res){
+    newOrder.save(function (err, res){
         if (err) {
-            return response.send({status: 'Failure'});
-            // status = "Failures";
-            // return res.send({status: 'Failures'});
-            // return console.error(err);
+            response.status(500);
+            var messages = []
+            messages.push(err.message);
+
+            var keys = Object.keys(err.errors);
+            for (var k in keys) {
+                messages.push(err.errors[keys[k]].message);
+            }
+            messages = messages.join('\n');
+            return response.send(messages);
         } else {
             return response.send({status: 'Success'});
         }
     });
-    // res.send({status: status});
 });
 
 

@@ -130,9 +130,11 @@ $(document).ready(function() {
             data: JSON.stringify({order: order}),
             contentType: "application/json; charset=utf-8",
             dataType: "json",
-            success: function (data){alert(data.status);},
-            failure: function (errMsg) {
-                alert(errMsg.status);
+            success: function (data) {
+                alert('Data saved successfully');
+            },
+            error: function (errMsg) {
+                alert(errMsg.responseText);
             }
         });
     });
