@@ -1,0 +1,23 @@
+extends ./layout.pug
+block headerTitle
+    title 订单状态
+block body
+    h2 订单状态
+    #order_status
+        table#order_status_table
+            colgroup
+                col(width="20%")
+                col(width="20%")
+                col(width="20%")
+                col(width="20%")
+                col(width="10%")
+                col(width="10%")
+            thead
+                tr
+                    th 订单名
+                    th 地址
+                    th 联系人
+                    th 状态
+                    th 责任人
+                    th 更改
+            tbody

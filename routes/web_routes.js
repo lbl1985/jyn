@@ -28,6 +28,11 @@ router.get("/about", function (req, res) {
     res.render("about", {options: req.app.locals});
 });
 
+router.get("/order_status", function(req, res) {
+    req = req;
+    res.render("order_status", {options: req.app.locals});
+});
+
 router.get("/signup", function (req, res) {
     res.render("signup", {options: req.app.locals});
 });
