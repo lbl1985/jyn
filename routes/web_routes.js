@@ -62,7 +62,7 @@ router.get("/login", function (req, res, next) {
 });
 
 router.post("/login", passport.authenticate('local', {
-    successRedirect: "/",
+    successRedirect: "/order_status",
     failureRedirect: "/login"
 }));
 
@@ -83,18 +83,6 @@ router.get("/users", function (req, res, next) {
         });
 });
 
-router.get("/order_status", function(req, res) {
-    req = req;
-    Order.find()
-        // .sort({createdAt: "descending"})
-        .exec(function(err, orders) {
-            if(err) {
-                return next(err);
-            }
-            res.render("order_status", {orders:orders, options: req.app.locals});
-        });
-    // res.render("order_status", {options: req.app.locals});
-});
 function ensureAuthenticated(req, res, next) {
     if (req.isAuthenticated() && req.app.locals.currentUser === req.user.username) {
         next();
@@ -118,7 +106,7 @@ router.get("/create_order", ensureAuthenticated, function (req, res) {
     res.render("create_order", {options: req.app.locals});
 });
 
-router.post("/create_order", function (req, response, next) {
+router.post("/create_order", ensureAuthenticated, function (req, response, next) {
     var order = req.body.order;
     var newOrder = new Order({
         uuid: order.uuid,
@@ -147,5 +135,16 @@ router.post("/create_order", function (req, response, next) {
     });
 });
 
+router.get("/order_status", ensureAuthenticated, function(req, res) {
+    req = req;
+    Order.find()
+        // .sort({createdAt: "descending"})
+        .exec(function(err, orders) {
+            if(err) {
+                return next(err);
+            }
+            res.render("order_status", {orders:orders, options: req.app.locals});
+        });
+});
 
 module.exports = router;
