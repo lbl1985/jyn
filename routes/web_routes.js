@@ -28,11 +28,6 @@ router.get("/about", function (req, res) {
     res.render("about", {options: req.app.locals});
 });
 
-router.get("/order_status", function(req, res) {
-    req = req;
-    res.render("order_status", {options: req.app.locals});
-});
-
 router.get("/signup", function (req, res) {
     res.render("signup", {options: req.app.locals});
 });
@@ -86,6 +81,19 @@ router.get("/users", function (req, res, next) {
             }
             res.render("users", {users: users, options: req.app.locals});
         });
+});
+
+router.get("/order_status", function(req, res) {
+    req = req;
+    Order.find()
+        // .sort({createdAt: "descending"})
+        .exec(function(err, orders) {
+            if(err) {
+                return next(err);
+            }
+            res.render("order_status", {orders:orders, options: req.app.locals});
+        });
+    // res.render("order_status", {options: req.app.locals});
 });
 function ensureAuthenticated(req, res, next) {
     if (req.isAuthenticated() && req.app.locals.currentUser === req.user.username) {

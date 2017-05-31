@@ -21,3 +21,13 @@ block body
                     th 责任人
                     th 更改
             tbody
+                each order in orders
+                    tr
+                        td #{order.title}
+                        td #{order.ship_add}
+                        td lbl
+                        td Open
+                        td lbl
+                        td actions
+                    
+
