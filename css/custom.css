@@ -12,6 +12,10 @@
     background-color: lightblue;
 }
 
+.not{
+    display:none;
+}
+
 #login_submit {
     max-width: 100;
     margin: auto;

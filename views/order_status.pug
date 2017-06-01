@@ -6,6 +6,7 @@ block body
     #order_status
         table#order_status_table
             colgroup
+                col(width="0%")
                 col(width="20%")
                 col(width="20%")
                 col(width="20%")
@@ -14,6 +15,7 @@ block body
                 col(width="10%")
             thead
                 tr
+                    th(style="display:none") uuid
                     th 订单名
                     th 地址
                     th 联系人
@@ -23,11 +25,14 @@ block body
             tbody
                 each order in orders
                     tr
+                        td(class=["uuid", "not"]) #{order.uuid}
                         td #{order.title}
                         td #{order.ship_add}
                         td lbl
                         td Open
                         td lbl
-                        td actions
+                        td 
+                            nav
+                                button(type='button' class=['btn', 'btn-info', 'deleteOrder']) 删除
                     
 
