@@ -9,7 +9,7 @@ var renderExternalTmpl = function (item) {
                 if (item.selector === "#order_table") {
                     $(item.selector).append(tmpl.render(item.data));
                 } else {
-                    rendered_array = $(tmpl.render(item.data)).children();
+                    var rendered_array = $(tmpl.render(item.data)).children();
                     $.each($(item.selector), function(i, v) {
                         $(v).html($(rendered_array[i]).html());
                     })

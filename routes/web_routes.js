@@ -130,6 +130,8 @@ router.post("/create_order", ensureAuthenticated, function (req, response, next)
             messages = messages.join('\n');
             return response.send(messages);
         } else {
+            // response.status(200);
+            // response.redirect('/order_status');
             return response.send({status: 'Success'});
         }
     });
@@ -145,6 +147,22 @@ router.get("/order_status", ensureAuthenticated, function(req, res) {
             }
             res.render("order_status", {orders:orders, options: req.app.locals});
         });
+});
+
+router.delete("/order_status", ensureAuthenticated, function(req, res) {
+    var orderUUID = req.body.orderUUID;
+    Order.find({uuid: req.body.orderUUID}, function(err, order) {
+        if(err) {
+            return next(err);
+        }
+        if(order) {
+            if (order.length > 0 && (order[0].uuid === orderUUID)) {
+                order[0].remove({uuid: req.body.orderUUID});
+                res.status(200);
+            }
+            return res.send({status: 'Success'});
+        }
+    });
 });
 
 module.exports = router;
