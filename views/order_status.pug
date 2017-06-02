@@ -27,12 +27,13 @@ block body
             tbody
                 each order in orders
                     tr
+                        - var assign_to = "";                        
                         td(class=["uuid", "not"]) #{order.uuid}
                         td #{order.title}
                         td #{order.ship_add}
                         td lbl
-                        td Open
-                        td lbl
+                        td #{order.status.status}
+                        td #{order.status.assign_to}
                         td 
                             nav
                                 button(type='button' class=['btn', 'btn-info', 'deleteOrder']) 删除

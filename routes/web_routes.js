@@ -166,4 +166,26 @@ router.delete("/order_status", ensureAuthenticated, function(req, res) {
     });
 });
 
+router.post("/order_status", ensureAuthenticated, function(req, res, next) {
+    var orderUUID = req.body.orderUUID;
+    Order.find({uuid: req.body.orderUUID}, function(err, order) {
+        if(err) {
+            return next(err);
+        }
+        if(order) {
+            if(order.length > 0 && (order[0].uuid === orderUUID)) {
+                var dt = Date();
+                order[0].status.assign_to = req.body.assign_to;
+                order[0].status.assign_by = req.body.assign_by;
+                order[0].status.date = order[0].status.date.push(req.body.dt);
+                order[0].save(function(err, updatedOrder) {
+                    if(err) next(err);
+                    return res.send({status: "Success"});
+                });
+            }
+        }
+
+    })
+})
+
 module.exports = router;
