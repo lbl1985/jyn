@@ -16,9 +16,10 @@ html(lang="zh")
                 ul(class="nav navbar-nav navbar-right")
                     - var userName = options.currentUser
                     if options.currentUser
-                        li <a href="/create_order">Create Order</a>
-                        li <a href="/edit">Hello, #{options.currentUser}</a>
-                        li <a href="/logout">Log Out</a>
+                        li <a href="/create_order">新订单</a>
+                        li <a href="/order_status">订单状态</a>
+                        li <a href="/edit">你好, #{options.currentUser}</a>
+                        li <a href="/logout">登出</a>
                     else
                         li <a href="/login">登录</a>
                         li <a href="/signup">注册</a>
