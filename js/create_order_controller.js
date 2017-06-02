@@ -131,6 +131,7 @@ $(document).ready(function() {
             contentType: "application/json; charset=utf-8",
             dataType: "json",
             success: function (data) {
+                window.location.reload();
                 alert('Data saved successfully');
             },
             error: function (errMsg) {
