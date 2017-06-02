@@ -115,6 +115,7 @@ router.post("/create_order", ensureAuthenticated, function (req, response, next)
         ship_add: order.ship_add,
         company: "Other Company",
         company_src: "QD Jieyina",
+        status: order.status,
         note: order.note
     });
     newOrder.save(function (err, res){

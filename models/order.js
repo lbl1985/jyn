@@ -15,18 +15,17 @@ var productSchema = mongoose.Schema({
 
 var orderStatus = mongoose.Schema({
     // status includes:
-    // Created, payment_received, manufacture, shipping, shipped, closed
+    // 创建, 收到付款, 生产中, 运输中, 到达, 结束
     status: {type: String},
-    date: {type: Date},
+    date: {type: [Date]},
     create_date: {type: Date, default: Date.now},
     create_by: {type: String},
-    assign_to: {type: String},
-    assign_by: {type: String},
-    assign_date: {type: Date},
+    assign_to: {type: [String]},
+    assign_by: {type: [String]},
     ship_by: {type: String},
     ship_date: {type: Date},
     close_by: {type: String},
-    close_date: {type: String}
+    close_date: {type: Date}
 });
 
 var contactInfo = mongoose.Schema({

@@ -71,6 +71,22 @@ var getGuid = function guid() {
             s4() + '-' + s4() + s4() + s4();
 }
 
+var createStatus = function() {
+    var status = {};
+    var userName = $('#username').text();
+    var dt = new Date();
+    var currentDateTimeStr = getCurrentTimeString();
+
+    status.status = "创建";
+    status.date = [dt];
+    status.created_date = dt;
+    status.created_by = userName;
+    status.assign_to = userName;
+    status.assign_by = userName;
+    status.ship_by = "";
+    return status;
+}
+
 $(document).ready(function() {
     var currentRow = {};
 
@@ -124,6 +140,8 @@ $(document).ready(function() {
             products.push( $(v).productRowToObject());
         });
         order.products = products;
+        order.status = createStatus();
+
         $.ajax({
             type: "POST",
             url: "/create_order",
@@ -168,10 +186,6 @@ $(document).ready(function() {
         evt.preventDefault();
         $($(evt.target).parent('tr')[0]).toggleClass('rowHighlight');
     });
-
-    // $('#order_table tbody tr').click(function(evt){
-    //     $(evt.target).closet('td').siblings().andSelf().toggleClass('rowHighLight');
-    // });
 
     $('#order_table tbody').on('dblclick', 'td', function(evt) {
         evt.preventDefault();

@@ -7,6 +7,7 @@ html(lang="zh")
         link(rel="stylesheet" type="text/css" href="/css/custom.css")
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+        <script src="/js/utilities.js"></script>
         block otherScripts
         div(class="navbar navbar-default navbar-static-top" role="navigation")
             div(class="container")
@@ -18,7 +19,7 @@ html(lang="zh")
                     if options.currentUser
                         li <a href="/create_order">新订单</a>
                         li <a href="/order_status">订单状态</a>
-                        li <a href="/edit">你好, #{options.currentUser}</a>
+                        li <a id="username" href="/edit">#{options.currentUser}</a>
                         li <a href="/logout">登出</a>
                     else
                         li <a href="/login">登录</a>
