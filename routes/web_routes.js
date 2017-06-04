@@ -71,7 +71,17 @@ router.get("/logout", function (req, res) {
     res.redirect("/");
 })
 
-router.get("/users", function (req, res, next) {
+
+
+function ensureAuthenticated(req, res, next) {
+    if (req.isAuthenticated() && req.app.locals.currentUser === req.user.username) {
+        next();
+    } else {
+        res.redirect("/login");
+    }
+}
+
+router.get("/users", ensureAuthenticated, function (req, res, next) {
     req = req;
     User.find()
         .sort({createdAt: "descending"})
@@ -83,13 +93,21 @@ router.get("/users", function (req, res, next) {
         });
 });
 
-function ensureAuthenticated(req, res, next) {
-    if (req.isAuthenticated() && req.app.locals.currentUser === req.user.username) {
-        next();
-    } else {
-        res.redirect("/login");
-    }
-}
+router.get("/users_array", ensureAuthenticated, function(req, res, next) {
+    User.find()
+        .sore({createdAt: "ascending"})
+        .exec(function (err, users) {
+            if(err) {
+                return next(err);
+            }
+            var arr = []
+            users.forEach(function(user) {
+                arr.push(user.getName());
+            });
+            res.send({users:arr});
+        });
+});
+
 router.get("/users/:username/profile", ensureAuthenticated, function (req, res, next) {
     User.findOne({username: req.params.username}, function (err, user) {
         if (err) {
@@ -176,6 +194,7 @@ router.post("/order_status", ensureAuthenticated, function(req, res, next) {
             if(order.length > 0 && (order[0].uuid === orderUUID)) {
                 var dt = Date();
                 order[0].status.assign_to = req.body.assign_to;
+                order[0].status.status = req.body.status;
                 order[0].status.assign_by = req.body.assign_by;
                 order[0].status.date = order[0].status.date.push(req.body.dt);
                 order[0].save(function(err, updatedOrder) {
