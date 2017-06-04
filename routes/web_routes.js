@@ -95,7 +95,7 @@ router.get("/users", ensureAuthenticated, function (req, res, next) {
 
 router.get("/users_array", ensureAuthenticated, function(req, res, next) {
     User.find()
-        .sore({createdAt: "ascending"})
+        .sort({createdAt: "ascending"})
         .exec(function (err, users) {
             if(err) {
                 return next(err);
@@ -104,7 +104,10 @@ router.get("/users_array", ensureAuthenticated, function(req, res, next) {
             users.forEach(function(user) {
                 arr.push(user.getName());
             });
-            res.send({users:arr});
+            var obj = {};
+            obj.users = arr;
+            res.status(200);
+            res.send(obj);
         });
 });
 

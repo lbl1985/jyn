@@ -1,7 +1,13 @@
 var status_vals = ["Open", "Paid", "Production", "Shipping", "Arrived", "Close"];
 var status_texts = ["创建", "收到付款", "生产中", "运输中", "到达", "结束"];
+// var users = [];
 
 $(document).ready(function() {
+    var users = [];
+    $.get("/users_array", "", function(data) {
+        users = data.users;
+    });
+
     $('.deleteOrder').on('click', function(evt) {
         evt.preventDefault();
         var uuid =$($(evt.target).parent().parent().siblings('.uuid')).text();
@@ -25,7 +31,7 @@ $(document).ready(function() {
         if ($(evt.target).attr('class') === 'td_status') {
             $(evt.target).html( createOptions(status_vals, status_texts) );
         } else if ($(evt.target).attr('class') === 'td_assign_to') {
-            console.log('user wants to change assign to');
+            $(evt.target).html( createOptions(users, users));
         }
     });
 
@@ -45,6 +51,6 @@ $(document).ready(function() {
             error: function (errMsg) {
                 alert('error with deleting');
             }
-        })
+        });
     })
 });
