@@ -34,8 +34,9 @@ var updateOrderStatus = function(target) {
 var createOptions = function(vals, texts) {
     var str = '';
     str += '<select class="form-control"> ';
-    vals.array.forEach(function(val, index) {
+    vals.forEach(function(val, index) {
         str += '<option value="' + val + '">' + texts[index] + '</option> ';
     });
-
+    str += '</select>';
+    return str;
 };

@@ -1,3 +1,6 @@
+var status_vals = ["Open", "Paid", "Production", "Shipping", "Arrived", "Close"];
+var status_texts = ["创建", "收到付款", "生产中", "运输中", "到达", "结束"];
+
 $(document).ready(function() {
     $('.deleteOrder').on('click', function(evt) {
         evt.preventDefault();
@@ -20,9 +23,7 @@ $(document).ready(function() {
     $('#order_status tbody').on('dblclick', 'td', function(evt) {
         evt.preventDefault();
         if ($(evt.target).attr('class') === 'td_status') {
-            $(evt.target).html(
-                '<select class="form-control"> <option value="Open">创建</option> <option value="Paid">收到付款</option> <option value="Production">生产中</option> <option value="Shipping">运输中</option> <option value="Arrived">到达</option> <option value="Close">结束</option> </select>'
-            );
+            $(evt.target).html( createOptions(status_vals, status_texts) );
         } else if ($(evt.target).attr('class') === 'td_assign_to') {
             console.log('user wants to change assign to');
         }
