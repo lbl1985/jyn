@@ -17,6 +17,17 @@ $(document).ready(function() {
         });
     });
 
+    $('#order_status tbody').on('dblclick', 'td', function(evt) {
+        evt.preventDefault();
+        if ($(evt.target).attr('class') === 'td_status') {
+            $(evt.target).html(
+                '<select class="form-control" id="status_selector" name="status"> <option value="Open">创建</option> <option value="Paid">收到付款</option> <option value="Production">生产中</option> <option value="Shipping">运输中</option> <option value="Arrived">到达</option> <option value="Close">结束</option> </select>'
+            );
+        } else if ($(evt.target).attr('class') === 'td_assign_to') {
+            console.log('user wants to change assign to');
+        }
+    });
+
     $('.editOrder').on('click', function(evt) {
         evt.preventDefault();
         var uuid = $($(evt.target).parent().parent().siblings('.uuid')).text();

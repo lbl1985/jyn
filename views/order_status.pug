@@ -29,11 +29,11 @@ block body
                     tr
                         - var assign_to = "";                        
                         td(class=["uuid", "not"]) #{order.uuid}
-                        td #{order.title}
-                        td #{order.ship_add}
-                        td lbl
-                        td #{order.status.status}
-                        td #{order.status.assign_to}
+                        td(class=['td_title']) #{order.title}
+                        td(class=['td_ship_add']) #{order.ship_add}
+                        td(class=['td_contact_name']) lbl                        
+                        td(class=['td_status']) #{order.status.status}
+                        td(class=['td_assign_to']) #{order.status.assign_to}
                         td 
                             nav
                                 button(type='button' class=['btn', 'btn-info', 'deleteOrder']) 删除
